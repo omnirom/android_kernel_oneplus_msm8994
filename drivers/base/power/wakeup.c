@@ -11,6 +11,7 @@
 #include <linux/sched.h>
 #include <linux/capability.h>
 #include <linux/export.h>
+#include <linux/proc_fs.h>
 #include <linux/suspend.h>
 #include <linux/seq_file.h>
 #include <linux/debugfs.h>
@@ -988,6 +989,7 @@ static int __init wakeup_sources_debugfs_init(void)
 {
 	wakeup_sources_stats_dentry = debugfs_create_file("wakeup_sources",
 			S_IRUGO, NULL, NULL, &wakeup_sources_stats_fops);
+	proc_create("wakelocks", S_IRUGO, NULL, &wakeup_sources_stats_fops);
 	return 0;
 }
 
