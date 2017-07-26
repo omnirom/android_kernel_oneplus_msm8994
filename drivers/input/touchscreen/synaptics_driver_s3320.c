@@ -171,7 +171,7 @@ int Down2UpSwip_gesture =0;//"down to up |"
 
 int Wgestrue_gesture =0;//"(W)"
 int Mgestrue_gesture =0;//"(M)"
-
+static int gesture_switch = 0;
 #endif
 //ruanbanmao@BSP add for tp gesture 2015-05-06, end
 #endif
@@ -1849,6 +1849,13 @@ static ssize_t down_swipe_enable_write_func(struct file *file, const char __user
 static const struct file_operations tp_gesture_proc_fops = {
 	.write = tp_gesture_write_func,
 	.read =  tp_gesture_read_func,
+	.open = simple_open,
+	.owner = THIS_MODULE,
+};
+
+static const struct file_operations gesture_switch_proc_fops = {
+	.write = gesture_switch_write_func,
+	.read =  gesture_switch_read_func,
 	.open = simple_open,
 	.owner = THIS_MODULE,
 };
